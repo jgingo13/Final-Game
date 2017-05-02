@@ -378,10 +378,6 @@ show_debug_message("end create level obj");
 if (irandom(odds) == 1) {
     audio_play_sound(sd_random_boom,10,false);
 }
-
-if (irandom(odds) == 2) {
-    audio_play_sound(sd_random_howl,10,false);
-}
 </string>
           </argument>
         </arguments>

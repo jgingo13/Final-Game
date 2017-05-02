@@ -118,9 +118,9 @@ with (obj_increase_health) {
           <argument>
             <kind>1</kind>
             <string>/// buy selected item
-if (global.currency &gt;=(7+global.cooldown*7) &amp;&amp; global.cooldown &lt; 9) {
+if (global.currency &gt;=cost("cooldown") &amp;&amp; global.cooldown &lt; 9) {
     ini_open("score.ini");
-    global.currency = global.currency - (7+global.cooldown*7);
+    global.currency = global.currency - cost("cooldown");
     ini_write_real("scoring","currency",global.currency);
     
     global.cooldown++;

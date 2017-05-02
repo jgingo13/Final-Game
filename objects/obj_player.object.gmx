@@ -219,7 +219,7 @@ can_shoot = true;
           <argument>
             <kind>1</kind>
             <string>/// Get input and move
-var spd = 5+ global.faster_player*0.5;
+var spd = 4+ ceil(global.faster_player*0.5);
 
 var hspd = (keyboard_check(ord('D')) - keyboard_check(ord('A'))) * spd;
 var vspd = (keyboard_check(ord('S')) - keyboard_check(ord('W'))) * spd;

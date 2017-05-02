@@ -7,29 +7,35 @@ if (instance_exists(obj_player)) {
         var dir = point_direction(x,y, obj_player.x, obj_player.y);
         var spd = 3;
         
+        // dasher
         if (object_get_name(object_index) == "obj_enemy_dasher") {
             spd = 12 * global.DELTA * global.SPD;
-            if (place_free(x+lengthdir_x(spd, dir), y)) {
+            if (place_free(x+lengthdir_x(spd, dir), y) && enemy_collision(lengthdir_x(spd, dir), 0) == false) {
                 x+= lengthdir_x(spd, dir);
             }
-            if (place_free(x, y + lengthdir_y(spd, dir))) {
-                y+= lengthdir_y(spd, dir);
-            }
-        }else if (object_get_name(object_index) == "obj_enemy_tank") {
-            spd = 3 * global.DELTA * global.SPD;
-            if (place_free(x+lengthdir_x(spd, dir), y)) {
-                x+= lengthdir_x(spd, dir);
-            }
-            if (place_free(x, y + lengthdir_y(spd, dir))) {
+            if (place_free(x, y + lengthdir_y(spd, dir)) && enemy_collision(0, lengthdir_y(spd,dir)) == false) {
                 y+= lengthdir_y(spd, dir);
             }
         }
-        else {
-            spd = 5 * global.DELTA * global.SPD;
-            if (place_free(x+lengthdir_x(spd, dir), y)) {
+        
+        // tank
+        else if (object_get_name(object_index) == "obj_enemy_tank") {
+            spd = 3 * global.DELTA * global.SPD;
+            if (place_free(x+lengthdir_x(spd, dir), y) && enemy_collision(lengthdir_x(spd, dir), 0) == false) {
                 x+= lengthdir_x(spd, dir);
             }
-            if (place_free(x, y + lengthdir_y(spd, dir))) {
+            if (place_free(x, y + lengthdir_y(spd, dir)) && enemy_collision(0, lengthdir_y(spd,dir)) == false) {
+                y+= lengthdir_y(spd, dir);
+            }
+        }
+        
+        // enemy, shooter
+        else {
+            spd = 5 * global.DELTA * global.SPD;
+            if (place_free(x+lengthdir_x(spd, dir), y) && enemy_collision(lengthdir_x(spd, dir), 0) == false) {
+                x+= lengthdir_x(spd, dir);
+            }
+            if (place_free(x, y + lengthdir_y(spd, dir)) && enemy_collision(0, lengthdir_y(spd,dir)) == false) {
                 y+= lengthdir_y(spd, dir);
             }
         }

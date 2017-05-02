@@ -2,7 +2,7 @@
 
 // get variables
 var upgrade = argument[0];
-var cost = argument[1];
+var cost_amt = argument[1];
 var xx = argument[2];
 var yy = argument[3];
 
@@ -13,5 +13,5 @@ if ((1+upgrade) > 9) {
 
 // if not maxed out
 else {
-    draw_text(xx,yy, "Cost:  " + string(cost));
+    draw_text(xx,yy, "Cost:  " + string(cost_amt));
 }

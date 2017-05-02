@@ -18,7 +18,6 @@
     <sounds name="Environment">
       <sound>sound\sd_music</sound>
       <sound>sound\sd_random_boom</sound>
-      <sound>sound\sd_random_howl</sound>
       <sound>sound\sd_locked</sound>
       <sound>sound\sd_player_death</sound>
       <sound>sound\sd_powerup</sound>
@@ -83,10 +82,15 @@
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\move.gml</script>
-    <script>scripts\move_to_player.gml</script>
+    <scripts name="Movement">
+      <script>scripts\move.gml</script>
+      <script>scripts\move_to_player.gml</script>
+      <script>scripts\enemy_collision.gml</script>
+    </scripts>
     <script>scripts\spawn_item.gml</script>
     <script>scripts\upgrade_level.gml</script>
+    <script>scripts\cost.gml</script>
+    <script>scripts\drop_currency.gml</script>
     <scripts name="Particles">
       <script>scripts\collect_diamond.gml</script>
       <script>scripts\bullets_collide.gml</script>
@@ -98,7 +102,6 @@
       <script>scripts\blood.gml</script>
       <script>scripts\currency_particles.gml</script>
     </scripts>
-    <script>scripts\drop_currency.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\font_text</font>

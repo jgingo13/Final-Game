@@ -95,28 +95,28 @@ draw_text(room_width-40-125,445, "Level:  " + string(1+global.cooldown));
 
 // upgrade costs
 draw_set_colour(c_green);
-if (global.currency&lt;1+global.faster_player || global.faster_player &gt;=9) {
+if (global.currency&lt;cost("faster_player") || global.faster_player &gt;=9) {
     draw_set_colour(c_red);
 }
-upgrade_level(global.faster_player,1+global.faster_player,40+125,495);
+upgrade_level(global.faster_player,cost("faster_player"),40+125,495);
 
 draw_set_colour(c_green);
-if (global.currency&lt;3+global.better_gun*2 || global.better_gun &gt;=9) {
+if (global.currency&lt;cost("better_gun") || global.better_gun &gt;=9) {
     draw_set_colour(c_red);
 }
-upgrade_level(global.better_gun,3+global.better_gun*2,room_width/2-20-125,495);
+upgrade_level(global.better_gun,cost("better_gun"),room_width/2-20-125,495);
 
 draw_set_colour(c_green);
-if (global.currency&lt;5+global.increase_health*5 || global.increase_health &gt;=9) {
+if (global.currency&lt;cost("increase_health") || global.increase_health &gt;=9) {
     draw_set_colour(c_red);
 }
-upgrade_level(global.increase_health,5+global.increase_health*5,room_width/2+20+125,495);
+upgrade_level(global.increase_health,cost("increase_health"),room_width/2+20+125,495);
 
 draw_set_colour(c_green);
-if (global.currency&lt;7+global.cooldown*7 || global.cooldown &gt;=9) {
+if (global.currency&lt;cost("cooldown") || global.cooldown &gt;=9) {
     draw_set_colour(c_red);
 }
-upgrade_level(global.cooldown,7+global.cooldown*7,room_width-40-125,495);
+upgrade_level(global.cooldown,cost("cooldown"),room_width-40-125,495);
 draw_set_colour(c_white);
 
 // diamonds
