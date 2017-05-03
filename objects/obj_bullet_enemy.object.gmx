@@ -58,7 +58,7 @@ motion_set(direction,spd * global.DELTA * global.SPD);
 var xx = x div CELL_WIDTH;
 var yy = y div CELL_HEIGHT;
 
-if (obj_level.grid[# xx, yy] == WALL) {
+if (obj_level2.grid_level[# xx, yy] == 1) {
     instance_destroy();
 }
 

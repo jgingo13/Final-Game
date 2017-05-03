@@ -38,8 +38,6 @@
     <sprite>sprites\spr_bullet</sprite>
     <sprite>sprites\spr_diamond</sprite>
     <sprite>sprites\spr_currency</sprite>
-    <sprite>sprites\spr_door_h</sprite>
-    <sprite>sprites\spr_door_v</sprite>
     <sprite>sprites\spr_invisible_void</sprite>
     <sprites name="Powerups">
       <sprite>sprites\spr_3_bullets</sprite>
@@ -75,7 +73,6 @@
   </sprites>
   <backgrounds name="background">
     <background>background\bg_floor</background>
-    <background>background\bg_walltiles</background>
     <background>background\bg_gradient</background>
     <background>background\bk_blood</background>
     <background>background\bk_screen</background>
@@ -86,6 +83,7 @@
       <script>scripts\move.gml</script>
       <script>scripts\move_to_player.gml</script>
       <script>scripts\enemy_collision.gml</script>
+      <script>scripts\hit_wall.gml</script>
     </scripts>
     <script>scripts\spawn_item.gml</script>
     <script>scripts\upgrade_level.gml</script>
@@ -127,6 +125,7 @@
     </objects>
     <objects name="Control">
       <object>objects\obj_level</object>
+      <object>objects\obj_level2</object>
       <object>objects\obj_manager</object>
       <object>objects\obj_complete_level</object>
       <object>objects\obj_die</object>
@@ -148,8 +147,6 @@
       <object>objects\obj_diamond_loc</object>
       <object>objects\obj_health</object>
     </objects>
-    <object>objects\obj_door_v</object>
-    <object>objects\obj_door_h</object>
     <object>objects\invisible_wall</object>
     <objects name="Effects">
       <object>objects\obj_fade</object>
