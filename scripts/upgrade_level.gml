@@ -7,7 +7,7 @@ var xx = argument[2];
 var yy = argument[3];
 
 // if maxed out
-if ((1+upgrade) > 9) {
+if ((1+upgrade) > 7) {
     draw_text(xx,yy, "Maxed Out");
 } 
 

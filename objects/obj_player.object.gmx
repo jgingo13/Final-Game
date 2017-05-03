@@ -219,7 +219,7 @@ can_shoot = true;
           <argument>
             <kind>1</kind>
             <string>/// Get input and move
-var spd = 4+ ceil(global.faster_player*0.5);
+var spd = 5 + ceil(global.faster_player*0.5);
 
 var hspd = (keyboard_check(ord('D')) - keyboard_check(ord('A'))) * spd;
 var vspd = (keyboard_check(ord('S')) - keyboard_check(ord('W'))) * spd;
@@ -340,7 +340,7 @@ health_up = true;
 audio_play_sound(sd_powerup, 8, false);
 
 // cahnge health
-hp_change = hp_max*0.25;
+hp_change = hp_max*0.5;
 if (hp_curr + hp_change &lt;= hp_max) {
     hp_curr = hp_curr + hp_change;
 } else {
@@ -478,6 +478,9 @@ alarm[2] = room_speed * 2;
           <argument>
             <kind>1</kind>
             <string>bomb_collected = true;
+with (obj_bomb) {
+    instance_destroy();
+}
 audio_play_sound(sd_powerup, 8, false);
 
 global.part_sys_powerup = part_system_create();
@@ -766,7 +769,7 @@ audio_play_sound(sd_collect_diamond,8,false);
 
 diamond_collected = true;
 image_index = image_index +2;
-//global.currency++;
+global.currency++;
 
 </string>
           </argument>
@@ -913,6 +916,7 @@ if (global.SPD == 1) {
           <argument>
             <kind>1</kind>
             <string>/// test next level 
+global.level = 10;
 instance_create(0,0,obj_complete_level);
 
 </string>

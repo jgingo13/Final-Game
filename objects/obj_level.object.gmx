@@ -28,11 +28,6 @@
             <string>/// CREATE THE LEVEL
 show_debug_message("new level");
 
-// custom scorebox length for draw
-ini_open("design.ini");
-x2 = ini_read_real("design","scorebox",185);
-ini_close();
-
 // Set room size -- grow with level
 room_width = (CELL_WIDTH/16) * (304 + global.level*32); 
 room_height = (CELL_HEIGHT/16) * (304 + global.level*32); 
@@ -55,11 +50,9 @@ ini_close();
 
 // Create the grid
 grid = ds_grid_create(width, height);
-
-// Fill the grid with the void 
 ds_grid_set_region(grid, 0, 0, width-1, height-1, VOID);
 
-// Randomize the world
+// Randomize grid
 randomize();
 
 // Create the controller in the center of the grid
@@ -75,8 +68,8 @@ var cdir = irandom(3);
 // The odds variable for changing direction
 var odds = 3;
 
-// Create the level using 1000 steps
-repeat(1000) {
+// Create the level using provided step count
+repeat(800+global.level*50) {
     // Place a floor tile at the controller position
     grid[# cx, cy] = FLOOR;
     
@@ -91,28 +84,31 @@ repeat(1000) {
     cx += xdir;
     cy += ydir;
     
-    // stay within grid
+    // stay within grid (leave a boundary outside)
     cx = clamp(cx, 1, width-2);
     cy = clamp(cy, 1, height-2);
 }
 
-// Add the walls
+// Assign and add walls
 for (var yy = 1; yy &lt; height-1; yy++) {
     for (var xx = 1; xx &lt; width-1; xx++) {
         if (grid[# xx, yy] == FLOOR) {
-            // Check for walls
+            // Check for walls to right
             if (grid[# xx+1, yy] != FLOOR) {
                 grid[# xx+1, yy] = WALL;
                 instance_create((xx+1)*CELL_WIDTH, yy*CELL_HEIGHT, invisible_wall);
             }
+            // ...left
             if (grid[# xx-1, yy] != FLOOR) {
                 grid[# xx-1, yy] = WALL;
                 instance_create((xx-1)*CELL_WIDTH, yy*CELL_HEIGHT, invisible_wall);
             }
+            // ...bottom
             if (grid[# xx, yy+1] != FLOOR) {
                 grid[# xx, yy+1] = WALL;
                 instance_create(xx*CELL_WIDTH, (yy+1)*CELL_HEIGHT, invisible_wall);
             }
+            // ...top
             if (grid[# xx, yy-1] != FLOOR) {
                 grid[# xx, yy-1] = WALL;
                 instance_create(xx*CELL_WIDTH, (yy-1)*CELL_HEIGHT, invisible_wall);
@@ -121,7 +117,7 @@ for (var yy = 1; yy &lt; height-1; yy++) {
     }
 }
 
-// Draw the level using the grid
+// Add floor tiles
 var last_x = 0;
 var last_y = 0;
 
@@ -256,7 +252,7 @@ for (var yy = 0; yy &lt; height*2; yy++) {
                         ds_list_add(wall_list, wall_id);
                     }
                 } else {
-                    var wall_id = tile_add(bg_walltiles, tw*1, th*2, tw, th, tx, ty-th, 0); // -ty
+                    var wall_id = tile_add(bg_walltiles, tw*1, th*2, tw, th, tx, ty-th, 0);  
                     with (obj_manager) {
                         ds_list_add(wall_list, wall_id);
                     }
@@ -266,7 +262,7 @@ for (var yy = 0; yy &lt; height*2; yy++) {
             // if no floor tile below
             if (bottom) {
                 if (!bottom_right) { // floor tile to bottom right
-                    var wall_id = tile_add(bg_walltiles, tw*2, th*0, tw, th, tx, ty+th,-1); // -ty-32
+                    var wall_id = tile_add(bg_walltiles, tw*2, th*0, tw, th, tx, ty+th,-1);  
                     with (obj_manager) {
                         ds_list_add(wall_list, wall_id);
                     }
@@ -325,6 +321,7 @@ for (var yy = 0; yy &lt; height*2; yy++) {
     }
 }
 
+
 // add minimap and obj manager
 instance_create(view_xview+5,view_yview+5,obj_mini_map);
 
@@ -350,6 +347,12 @@ global.level_complete_e = part_emitter_create(global.particle_system);
 
 global.currency_p = part_type_create();
 global.currency_e = part_emitter_create(global.particle_system);
+
+// if no door created, restart room
+if (!instance_exists(obj_door_v) &amp;&amp; !instance_exists(obj_door_h)) {
+    show_debug_message("restart room bc no door created");
+    room_restart();
+}
 
 show_debug_message("end create level obj");
 </string>
@@ -443,42 +446,27 @@ show_debug_message("end room");
             <kind>1</kind>
             <string>/// Draw score
 draw_set_alpha(0.7);
-if (score &lt;10) {
+if (score &lt;100) {
     draw_set_colour(c_gray);
-    draw_rectangle(5, 5, x2, 110, false);
-
+    draw_rectangle(5, 5, 195, 110, false);
     draw_set_colour(c_white);
-    draw_rectangle(5, 5, x2, 110, true);
-} else if(score &lt;100) {
-    x2 = lerp(x2,195,.25);
+    draw_rectangle(5, 5, 195, 110, true);
+} else if(score &lt;1000) {
     ini_open("design.ini");
-    ini_write_real("design","scorebox",x2);
     ini_close();
     draw_set_colour(c_gray);
-    draw_rectangle(5, 5, x2, 110, false);
+    draw_rectangle(5, 5, 220, 110, false);
 
     draw_set_colour(c_white);
-    draw_rectangle(5, 5, x2, 110, true);
-} else if (score&lt;1000){
-    x2 = lerp(x2,220,.25);
+    draw_rectangle(5, 5, 220, 110, true);
+} else {
     ini_open("design.ini");
-    ini_write_real("design","scorebox",x2);
     ini_close();
     draw_set_colour(c_gray);
-    draw_rectangle(5, 5, x2, 110, false);
+    draw_rectangle(5, 5, 235, 110, false);
 
     draw_set_colour(c_white);
-    draw_rectangle(5, 5, x2, 110, true);
-}else {
-    x2 = lerp(x2,235,.25);
-    ini_open("design.ini");
-    ini_write_real("design","scorebox",x2);
-    ini_close();
-    draw_set_colour(c_gray);
-    draw_rectangle(5, 5, x2, 110, false);
-
-    draw_set_colour(c_white);
-    draw_rectangle(5, 5, x2, 110, true);
+    draw_rectangle(5, 5, 235, 110, true);
 }
 
 draw_set_halign(fa_left);

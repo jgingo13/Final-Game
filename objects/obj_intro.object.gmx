@@ -34,12 +34,6 @@ highscore = ini_read_real("scoring", "highscore",0);
 //ini_write_real("scoring", "current_score", 0);
 
 // Get diamond count
-/*ini_write_real("scoring","currency",0);
-ini_write_real("upgrades","cooldown",0);
-ini_write_real("upgrades","faster_player",0);
-ini_write_real("upgrades","better_gun",0);
-ini_write_real("upgrades","increase_health",0);*/
-
 global.currency = ini_read_real("scoring","currency",0);
 
 global.cooldown = ini_read_real("upgrades","cooldown",0);
@@ -98,6 +92,89 @@ draw_text(room_width/2,570, "Highscore:  " + string(highscore) + "   ~   Gems:  
 
 draw_set_font(font_small);
 draw_text(room_width/2,650, "Select sounds taken from 'Dark Souls' &amp; 'Zelda'");
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="50">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ini_open("score.ini");
+ini_write_real("scoring","currency",10000);
+ini_close();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="49">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ini_open("score.ini");
+ini_write_real("scoring","currency",0);
+ini_write_real("upgrades","cooldown",10);
+ini_write_real("upgrades","faster_player",10);
+ini_write_real("upgrades","better_gun",10);
+ini_write_real("upgrades","increase_health",10);
+ini_close();
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="48">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>ini_open("score.ini");
+ini_write_real("scoring","currency",0);
+ini_write_real("upgrades","cooldown",0);
+ini_write_real("upgrades","faster_player",0);
+ini_write_real("upgrades","better_gun",0);
+ini_write_real("upgrades","increase_health",0);
+ini_close();
 </string>
           </argument>
         </arguments>
